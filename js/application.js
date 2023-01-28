@@ -1,27 +1,29 @@
 // remove all button
 $(document).ready(function(){
   $(".Action").click(function(){
-    $(".Cart-Items").remove();
-    $(".total-amount").empty() // to remove the subtotal
+    $(".Cart-Items").hide();
+    $(".Cart-Items").empty();
+    $(".total-amount").empty();
   });
 });
 
+
 // remove individual items
-$(document).ready(function(){
-  $(".remove").click(function(){
-    $(this).closest(".Cart-Items").remove();
-  });
+$(document).on('click', '.remove', function(){
+  $(this).closest('.Cart-Items').remove();
 });
+
 
 //calculate price based on quantity
 $(document).ready(function(){
-  $('.quantity input').change(function(){
+  $(document).on('change', "input[name='quantity']", function(){
     var quantity = $(this).val();
     var price = $(this).closest('.Cart-Items').find('.default-price').text();
     var total = (quantity * parseFloat(price.substring(1))).toFixed(2);
     $(this).closest('.Cart-Items').find('.amount').text('$' + total);
   });
 });
+
 
 // calculate total price
 $(document).ready(function(){
@@ -33,3 +35,34 @@ $(document).ready(function(){
     $('.total-amount').text("Cart-Total: " + '$' + subtotal.toFixed(2));
   });
 });
+
+// adding custom products to cart
+$(document).ready(function() {
+  $("#addProductForm").submit(function(event) {
+    event.preventDefault(); // prevent form from submitting and refreshing the page
+    var productName = $("#productName").val();
+    var productPrice = $("#productPrice").val();
+    var newProduct = '<div class="Cart-Items pad">' +
+                      '<div class="about">' +
+                        '<h1 class="title">' + productName + '</h1>' +
+                      '</div>' +
+                      '<div class="price">' +
+                        '<div class="default-price">$' + productPrice + '</div>' +
+                      '</div>' +
+                      '<div class="quantity">' +
+                        '<input type="number" name="quantity" min="1" max="10" placeholder="Quantity">' +
+                      '</div>' +
+                      '<div class="prices">' +
+                        '<div class="amount">$' + productPrice + '</div>' +
+                        '<div class="remove">🗑️</div>' +
+                      '</div>' +
+                    '</div>';
+    $(".empty-cart-message").remove();
+    $(".Cart-Items:last").after(newProduct); // add the new product after the last existing product
+    $("#productName").val(""); // reset the form inputs
+    $("#productPrice").val("");
+  });
+});
+
+
+
