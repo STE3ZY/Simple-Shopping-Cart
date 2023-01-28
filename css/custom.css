@@ -117,18 +117,18 @@ hr{
 	display: flex;
 	justify-content: space-between;
 }
-.Subtotal{
+.total-amount{
 	font-size: 22px;
 	font-family: 'Open Sans';
 	font-weight: 700;
 	color: #202020;
 }
-.total-amount{
+/* .total-amount{
 	font-size: 36px;
 	font-family: 'Open Sans';
 	font-weight: 900;
 	color: #202020;
-}
+} */
 .button{
 	margin-top: 10px;
 	margin-bottom: 10px;
