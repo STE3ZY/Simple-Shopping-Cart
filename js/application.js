@@ -50,7 +50,7 @@ $(document).ready(function() {
                         '<div class="default-price">$' + productPrice + '</div>' +
                       '</div>' +
                       '<div class="quantity">' +
-                        '<input type="number" name="quantity" min="1" max="10" placeholder="Quantity">' +
+                        '<input type="number" name="quantity" min="1" max="10" value="1" placeholder="Quantity">' +
                       '</div>' +
                       '<div class="prices">' +
                         '<div class="amount">$' + productPrice + '</div>' +
