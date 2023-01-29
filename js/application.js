@@ -64,5 +64,7 @@ $(document).ready(function() {
   });
 });
 
+// Increase the height of the CartContainer to show the new item
+$(".CartContainer").height($(".CartContainer").height() + $(".Cart-Items").last().height());
 
 
