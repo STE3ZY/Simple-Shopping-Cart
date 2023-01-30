@@ -2,9 +2,12 @@
 $(document).ready(function(){
   $(".Action").click(function(){
     // $(".Cart-Items").hide();
-    $(".Cart-Items").empty();
+    $(".Cart-Items").remove();
     $(".total-amount").empty();
     $(".empty-message").show();
+    $(".empty-message").animate({
+      marginLeft: "0"
+    }, 100);
   });
 });
 
@@ -12,6 +15,13 @@ $(document).ready(function(){
 // remove individual items
 $(document).on('click', '.remove', function(){
   $(this).closest('.Cart-Items').remove();
+  if ($(".Cart-Items").length === 0){
+    $(".empty-message").show();
+    $(".total-amount").empty();
+  }
+  else {
+    $(".empty-message").hide();
+  }
 });
 
 
@@ -59,7 +69,13 @@ $(document).ready(function() {
                       '</div>' +
                     '</div>';
     $(".empty-message").hide();
-    $(".Cart-Items:last").after(newProduct); // add the new product after the last existing product
+    // $(".Cart-Items:last").after(newProduct); // add the new product after the last existing product
+    if ($(".Cart-Items").length > 0) {
+      $(".Cart-Items:last").after(newProduct);
+    } else {
+      $(".CartContainer").children().first().after(newProduct);
+    }
+    
     $("#productName").val(""); // reset the form inputs
     $("#productPrice").val("");
     
@@ -68,7 +84,4 @@ $(document).ready(function() {
 
 // Increase the height of the CartContainer to show the new item
 $(".CartContainer").height($(".CartContainer").height() + $(".Cart-Items").last().height());
-
-
-
 
